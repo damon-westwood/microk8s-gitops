@@ -1,0 +1,71 @@
+USER-SUPPLIED VALUES:
+affinity: {}
+autoscaling:
+  enabled: false
+  maxReplicas: 6
+  minReplicas: 2
+  targetCPUUtilizationPercentage: 80
+containerPort: 8080
+extraEmptyDirMounts:
+- mountPath: /tmp
+  name: tmp
+- mountPath: /var/cache/nginx
+  name: cache
+- mountPath: /var/run
+  name: run
+fullnameOverride: ""
+image:
+  pullPolicy: IfNotPresent
+  repository: nginxinc/nginx-unprivileged
+  tag: 1.27-alpine
+ingress:
+  annotations: {}
+  className: ""
+  enabled: false
+  hosts:
+  - host: cosmic-invaders.local
+    paths:
+    - path: /
+      pathType: Prefix
+  tls: []
+nameOverride: ""
+nodeSelector: {}
+podAnnotations: {}
+podDisruptionBudget:
+  enabled: false
+  minAvailable: 1
+podSecurityContext:
+  fsGroup: 101
+  runAsNonRoot: true
+  runAsUser: 101
+probes:
+  liveness:
+    initialDelaySeconds: 3
+    path: /
+    periodSeconds: 10
+  readiness:
+    initialDelaySeconds: 1
+    path: /
+    periodSeconds: 5
+replicaCount: 2
+resources:
+  limits:
+    cpu: 200m
+    memory: 64Mi
+  requests:
+    cpu: 10m
+    memory: 16Mi
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+service:
+  port: 80
+  type: NodePort
+serviceAccount:
+  annotations: {}
+  create: false
+  name: ""
+tolerations: []
