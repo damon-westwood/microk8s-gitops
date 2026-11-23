@@ -47,7 +47,7 @@ probes:
     initialDelaySeconds: 1
     path: /
     periodSeconds: 5
-replicaCount: 6
+replicaCount: 2
 resources:
   limits:
     cpu: 200m
